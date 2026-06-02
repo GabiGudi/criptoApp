@@ -1,0 +1,6 @@
+@CriptoAppAPI_HostAddress = http://localhost:5003
+
+GET {{CriptoAppAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -10,3 +10,6 @@ frontend/dist/
 .env
 *.user
 .DS_Store
+
+# Visual Studio
+backend/CriptoAppAPI/.vs/
