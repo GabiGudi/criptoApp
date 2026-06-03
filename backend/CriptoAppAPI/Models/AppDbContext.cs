@@ -17,7 +17,8 @@ namespace CriptoAppAPI.Models
             modelBuilder.Entity<Transaccion>()
                 .HasOne(t => t.cliente)
                 .WithMany()
-                .HasForeignKey(t => t.cliente_id);
+                .HasForeignKey(t => t.cliente_id)
+                .IsRequired(false); 
         }
     }
 }

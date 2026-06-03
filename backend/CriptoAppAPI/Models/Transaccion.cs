@@ -19,7 +19,7 @@ namespace CriptoAppAPI.Models
 
         [Required] public DateTime datetime { get; set; }
 
-        [Required] public int cliente_id { get; set; }          // FK al cliente
+        [Required] public int? cliente_id { get; set; }          // FK al cliente
 
         public Cliente? cliente { get; set; }       // relación de navegación
     }
