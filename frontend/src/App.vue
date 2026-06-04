@@ -4,19 +4,21 @@
 <template>
   <nav>
     <div class="nav-logo">
-  <svg width="40" height="36" viewBox="0 4 108 92" xmlns="http://www.w3.org/2000/svg">
-    <!-- C: arco dorado abierto a la derecha -->
-    <path d="M 62 27 A 32 32 0 1 0 62 73"
-      fill="none" stroke="#f0b429" stroke-width="15" stroke-linecap="butt"/>
-    <!-- A: dos piernas -->
-    <polyline points="53,90 71,10 89,90"
-      fill="none" stroke="#f0b429" stroke-width="13" stroke-linejoin="miter"/>
-    <!-- A: barra horizontal -->
-    <line x1="60" y1="59" x2="82" y2="59"
-      stroke="#f0b429" stroke-width="13" stroke-linecap="butt"/>
-  </svg>
-  CriptoApp
-</div>
+      <svg width="40" height="36" viewBox="0 4 108 92" xmlns="http://www.w3.org/2000/svg">
+        <path d="M 62 27 A 32 32 0 1 0 62 73"
+          fill="none" stroke="#f0b429" stroke-width="15" stroke-linecap="butt"/>
+        <polyline points="53,90 71,10 89,90"
+          fill="none" stroke="#f0b429" stroke-width="13" stroke-linejoin="miter"/>
+        <line x1="60" y1="59" x2="82" y2="59"
+          stroke="#f0b429" stroke-width="13" stroke-linecap="butt"/>
+      </svg>
+      CriptoApp
+    </div>
+
+    <div class="nav-links">
+      <RouterLink to="/">Nueva operación</RouterLink>
+      <RouterLink to="/historial">Historial</RouterLink>
+    </div>
   </nav>
 
   <main>
