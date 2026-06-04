@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CriptoAppAPI.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260603180011_ClienteOpcional")]
-    partial class ClienteOpcional
+    [Migration("20260604203802_Inicial")]
+    partial class Inicial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -58,7 +58,7 @@ namespace CriptoAppAPI.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("cliente_id")
+                    b.Property<int?>("cliente_id")
                         .HasColumnType("int");
 
                     b.Property<decimal>("crypto_amount")
@@ -76,18 +76,7 @@ namespace CriptoAppAPI.Migrations
 
                     b.HasKey("id");
 
-                    b.HasIndex("cliente_id");
-
                     b.ToTable("Transacciones");
-                });
-
-            modelBuilder.Entity("CriptoAppAPI.Models.Transaccion", b =>
-                {
-                    b.HasOne("CriptoAppAPI.Models.Cliente", "cliente")
-                        .WithMany()
-                        .HasForeignKey("cliente_id");
-
-                    b.Navigation("cliente");
                 });
 #pragma warning restore 612, 618
         }

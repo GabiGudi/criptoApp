@@ -36,33 +36,22 @@ namespace CriptoAppAPI.Migrations
                     crypto_amount = table.Column<decimal>(type: "decimal(18,8)", nullable: false),
                     money = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     datetime = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    cliente_id = table.Column<int>(type: "int", nullable: false)
+                    cliente_id = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Transacciones", x => x.id);
-                    table.ForeignKey(
-                        name: "FK_Transacciones_Clientes_cliente_id",
-                        column: x => x.cliente_id,
-                        principalTable: "Clientes",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Transacciones_cliente_id",
-                table: "Transacciones",
-                column: "cliente_id");
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Transacciones");
+                name: "Clientes");
 
             migrationBuilder.DropTable(
-                name: "Clientes");
+                name: "Transacciones");
         }
     }
 }
