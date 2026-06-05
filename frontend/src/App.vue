@@ -26,7 +26,6 @@
   </main>
 </template>
 
-<!-- Sin scoped: aplica a toda la app -->
 <style>
 *, *::before, *::after {
   box-sizing: border-box;

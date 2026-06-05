@@ -34,13 +34,11 @@ namespace CriptoAppAPI.Services
 
         public async Task<TransaccionDTO> Crear(CrearTransaccionDTO dto)
         {
-            // 1. Consultar el precio actual en CriptoYa
+            
             decimal precio = await _criptoYaServicio.ObtenerPrecio(dto.crypto_code);
 
-            // 2. Calcular el total en pesos: precio * cantidad
             decimal total = precio * dto.crypto_amount;
 
-            // 3. Armar la entidad para guardar en la base de datos
             var transaccion = new Transaccion
             {
                 crypto_code = dto.crypto_code,
@@ -50,11 +48,9 @@ namespace CriptoAppAPI.Services
                 datetime = dto.datetime
             };
 
-            // 4. Guardar en la base de datos
             _contexto.Transacciones.Add(transaccion);
             await _contexto.SaveChangesAsync();
 
-            // 5. Devolver los datos al frontend como DTO
             return new TransaccionDTO
             {
                 id = transaccion.id,

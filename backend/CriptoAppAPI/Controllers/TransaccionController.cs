@@ -28,11 +28,9 @@ namespace CriptoAppAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> Crear([FromBody] CrearTransaccionDTO dto)
         {
-            // Validar que la cantidad sea mayor a 0
             if (dto.crypto_amount <= 0)
                 return BadRequest("La cantidad de criptomoneda debe ser mayor a 0.");
 
-            // Validar que la acción sea compra o venta
             if (dto.action != "purchase" && dto.action != "sale")
                 return BadRequest("La acción debe ser 'purchase' o 'sale'.");
 

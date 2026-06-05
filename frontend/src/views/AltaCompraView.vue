@@ -15,7 +15,7 @@ let action        = ref('purchase')
 let crypto_amount = ref('')
 let enviando      = ref(false)
 let error         = ref('')
-let exito         = ref(null)  // guarda la transacción creada
+let exito         = ref(null)  
 
 async function enviarFormulario() {
   error.value = ''
@@ -53,7 +53,6 @@ async function enviarFormulario() {
   }
 }
 
-// Devuelve el objeto cripto seleccionado actualmente
 function criptoActual() {
   return criptos.find(c => c.code === crypto_code.value)
 }
@@ -65,8 +64,6 @@ function criptoActual() {
     <p class="subtitulo">Registrá una compra o venta de criptomonedas</p>
 
     <div class="card">
-
-      <!-- Selector de criptomoneda -->
       <div class="campo">
         <label>Criptomoneda</label>
         <div class="cripto-grid">
@@ -89,7 +86,6 @@ function criptoActual() {
         </div>
       </div>
 
-      <!-- Toggle compra / venta -->
       <div class="campo">
         <label>Tipo de operación</label>
         <div class="toggle-group">
@@ -112,7 +108,6 @@ function criptoActual() {
         </div>
       </div>
 
-      <!-- Cantidad -->
       <div class="campo">
         <label>Cantidad</label>
         <div class="input-wrapper">
@@ -131,7 +126,6 @@ function criptoActual() {
         </div>
       </div>
 
-      <!-- Mensajes -->
       <p class="msg-error" v-if="error">⚠ {{ error }}</p>
 
       <div class="msg-exito" v-if="exito">
@@ -145,7 +139,6 @@ function criptoActual() {
         </div>
       </div>
 
-      <!-- Botón -->
       <button
         class="btn-submit"
         :class="action === 'purchase' ? 'btn-compra' : 'btn-venta'"

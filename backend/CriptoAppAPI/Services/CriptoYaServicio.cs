@@ -7,7 +7,6 @@ namespace CriptoAppAPI.Services
     {
         private readonly HttpClient _httpClient;
 
-        // Mapeamos nuestros códigos al formato que usa CriptoYa en la URL
         private readonly Dictionary<string, string> _codigos = new()
         {
             { "bitcoin", "btc" },
@@ -33,16 +32,15 @@ namespace CriptoAppAPI.Services
             string respuesta = await _httpClient.GetStringAsync(url);
             var datos = JsonSerializer.Deserialize<CriptoYaRespuesta>(respuesta);
 
-            return datos.totalAsk; // precio real que pagás al comprar
+            return datos.totalAsk; 
         }
     }
 
-    // Clase para leer la respuesta JSON de CriptoYa
     public class CriptoYaRespuesta
     {
-        public decimal ask { get; set; } // precio de venta
-        public decimal totalAsk { get; set; } // precio con comisión incluida
-        public decimal bid { get; set; } // precio de compra
-        public decimal totalBid { get; set; } // precio con comisión incluida
+        public decimal ask { get; set; } 
+        public decimal totalAsk { get; set; } 
+        public decimal bid { get; set; } 
+        public decimal totalBid { get; set; } 
     }
 }

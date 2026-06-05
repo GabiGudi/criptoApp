@@ -7,18 +7,18 @@ namespace CriptoAppAPI.Models
     {
         [Key] public int id { get; set; }
 
-        [Required] public string crypto_code { get; set; }    // "bitcoin", "usdc", "eth"
+        [Required] public string crypto_code { get; set; }   
 
-        [Required] public string action { get; set; }          // "purchase" o "sale"
+        [Required] public string action { get; set; }         
 
-        [Column(TypeName = "decimal(18,8)")] // Lo agregamos ya que  los campos decimal necesitan precisión definida - 8 decimales para cripto
-        [Required] public decimal crypto_amount { get; set; }  // cantidad de cripto comprada/vendida
+        [Column(TypeName = "decimal(18,8)")]
+        [Required] public decimal crypto_amount { get; set; }  
 
-        [Column(TypeName = "decimal(18,2)")] // 2 decimales para pesos
-        [Required] public decimal money { get; set; }          // total en pesos ARS
+        [Column(TypeName = "decimal(18,2)")] 
+        [Required] public decimal money { get; set; }         
 
         [Required] public DateTime datetime { get; set; }
 
-        public int? cliente_id { get; set; }          // FK al cliente
+        public int? cliente_id { get; set; }      
     }
 }
