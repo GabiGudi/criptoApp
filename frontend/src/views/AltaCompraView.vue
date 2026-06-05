@@ -35,7 +35,11 @@ async function enviarFormulario() {
     crypto_code:   crypto_code.value,
     action:        action.value,
     crypto_amount: Number(crypto_amount.value),
-    datetime:      new Date().toISOString()
+    datetime: (() => {
+    const ahora = new Date()
+    const offset = ahora.getTimezoneOffset() * 60000
+    return new Date(ahora.getTime() - offset).toISOString().slice(0, 19)
+  })()
   })
   enviando.value = false
 
