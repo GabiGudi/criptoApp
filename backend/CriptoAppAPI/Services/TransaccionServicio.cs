@@ -61,5 +61,59 @@ namespace CriptoAppAPI.Services
                 datetime = transaccion.datetime
             };
         }
+
+        public async Task<TransaccionDTO?> ObtenerPorId(int id)
+        {
+            var transaccion = await _contexto.Transacciones.FindAsync(id);
+
+            if (transaccion == null) return null;
+
+            return new TransaccionDTO
+            {
+                id = transaccion.id,
+                crypto_code = transaccion.crypto_code,
+                action = transaccion.action,
+                crypto_amount = transaccion.crypto_amount,
+                money = transaccion.money,
+                datetime = transaccion.datetime
+            };
+        }
+
+        public async Task<TransaccionDTO?> Actualizar(int id, ActualizarTransaccionDTO dto)
+        {
+            var transaccion = await _contexto.Transacciones.FindAsync(id);
+
+            if (transaccion == null) return null;
+
+            if (dto.crypto_code != null) transaccion.crypto_code = dto.crypto_code;
+            if (dto.action != null) transaccion.action = dto.action;
+            if (dto.crypto_amount != null) transaccion.crypto_amount = dto.crypto_amount.Value;
+            if (dto.money != null) transaccion.money = dto.money.Value;
+            if (dto.datetime != null) transaccion.datetime = dto.datetime.Value;
+
+            await _contexto.SaveChangesAsync();
+
+            return new TransaccionDTO
+            {
+                id = transaccion.id,
+                crypto_code = transaccion.crypto_code,
+                action = transaccion.action,
+                crypto_amount = transaccion.crypto_amount,
+                money = transaccion.money,
+                datetime = transaccion.datetime
+            };
+        }
+
+        public async Task<bool> Eliminar(int id)
+        {
+            var transaccion = await _contexto.Transacciones.FindAsync(id);
+
+            if (transaccion == null) return false;
+
+            _contexto.Transacciones.Remove(transaccion);
+            await _contexto.SaveChangesAsync();
+
+            return true;
+        }
     }
 }

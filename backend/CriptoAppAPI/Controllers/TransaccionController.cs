@@ -37,5 +37,41 @@ namespace CriptoAppAPI.Controllers
             var transaccion = await _transaccionServicio.Crear(dto);
             return Ok(transaccion);
         }
+
+        // GET /transacciones/{id}
+        [HttpGet("{id}")]
+        public async Task<IActionResult> ObtenerPorId(int id)
+        {
+            var transaccion = await _transaccionServicio.ObtenerPorId(id);
+
+            if (transaccion == null)
+                return NotFound($"No existe una transacción con id {id}.");
+
+            return Ok(transaccion);
+        }
+
+        // PATCH /transacciones/{id}
+        [HttpPatch("{id}")]
+        public async Task<IActionResult> Actualizar(int id, [FromBody] ActualizarTransaccionDTO dto)
+        {
+            var transaccion = await _transaccionServicio.Actualizar(id, dto);
+
+            if (transaccion == null)
+                return NotFound($"No existe una transacción con id {id}.");
+
+            return Ok(transaccion);
+        }
+
+        // DELETE /transacciones/{id}
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Eliminar(int id)
+        {
+            var resultado = await _transaccionServicio.Eliminar(id);
+
+            if (!resultado)
+                return NotFound($"No existe una transacción con id {id}.");
+
+            return Ok("Transacción eliminada correctamente.");
+        }
     }
 }

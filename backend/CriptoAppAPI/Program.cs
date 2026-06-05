@@ -11,6 +11,7 @@ builder.Services.AddDbContext<AppDbContext>(opciones =>
     opciones.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddHttpClient<ICriptoYaServicio, CriptoYaServicio>();
 builder.Services.AddScoped<ITransaccionServicio, TransaccionServicio>();
+builder.Services.AddScoped<IClienteServicio, ClienteServicio>();
 
 builder.Services.AddCors(opciones =>
 {
