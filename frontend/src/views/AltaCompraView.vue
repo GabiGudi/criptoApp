@@ -1,6 +1,17 @@
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import api from '@/api.js'
+
+let clientes   = ref([])
+let client_id  = ref('')
+
+onMounted(async () => {
+    try {
+        clientes.value = await api.obtenerClientes()
+    } catch (e) {
+        console.error('No se pudieron cargar los clientes:', e)
+    }
+})
 
 const criptos = [
   { code: 'bitcoin', nombre: 'Bitcoin',  simbolo: '₿', color: '#f7931a', fondo: '#2a1500' },
@@ -36,10 +47,11 @@ async function enviarFormulario() {
     action:        action.value,
     crypto_amount: Number(crypto_amount.value),
     datetime: (() => {
-    const ahora = new Date()
-    const offset = ahora.getTimezoneOffset() * 60000
-    return new Date(ahora.getTime() - offset).toISOString().slice(0, 19)
-  })()
+      const ahora = new Date()
+      const offset = ahora.getTimezoneOffset() * 60000
+      return new Date(ahora.getTime() - offset).toISOString().slice(0, 19)
+    })(),
+    cliente_id: client_id.value ? Number(client_id.value) : null
   })
   enviando.value = false
 
@@ -106,6 +118,20 @@ function criptoActual() {
             ▼ Venta
           </button>
         </div>
+      </div>
+
+      <div class="campo">
+        <label>Cliente <span class="opcional">(opcional)</span></label>
+        <select v-model="client_id">
+          <option value="">-- Sin cliente --</option>
+          <option
+            v-for="cliente in clientes"
+            :key="cliente.id"
+            :value="cliente.id"
+           >
+            {{ cliente.nombre }} — {{ cliente.email }}
+          </option>
+        </select>
       </div>
 
       <div class="campo">
@@ -369,5 +395,27 @@ input::placeholder {
 .btn-submit:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+select {
+    background: #21262d;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    padding: 0.7rem 0.9rem;
+    color: #e6edf3;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+select:focus {
+    outline: none;
+    border-color: #58a6ff;
+}
+
+.opcional {
+    color: #8b949e;
+    font-size: 0.75rem;
+    text-transform: none;
+    letter-spacing: 0;
 }
 </style>

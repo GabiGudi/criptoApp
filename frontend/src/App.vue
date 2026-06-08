@@ -18,6 +18,7 @@
     <div class="nav-links">
       <RouterLink to="/">Nueva operación</RouterLink>
       <RouterLink to="/historial">Historial</RouterLink>
+      <RouterLink to="/clientes/nuevo">Nuevo cliente</RouterLink>
     </div>
   </nav>
 
