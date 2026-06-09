@@ -13,6 +13,7 @@ const criptos = [
 let crypto_code   = ref('')
 let action        = ref('purchase')
 let crypto_amount = ref('')
+let datetime      = ref('')
 let enviando      = ref(false)
 let error         = ref('')
 let exito         = ref(null)  
@@ -29,17 +30,17 @@ async function enviarFormulario() {
     error.value = 'La cantidad debe ser mayor a 0.'
     return
   }
+  if (!datetime.value) {
+    error.value = 'Ingresá la fecha y hora.'
+    return
+  }
 
   enviando.value = true
   const resultado = await api.crearTransaccion({
     crypto_code:   crypto_code.value,
     action:        action.value,
     crypto_amount: Number(crypto_amount.value),
-    datetime: (() => {
-    const ahora = new Date()
-    const offset = ahora.getTimezoneOffset() * 60000
-    return new Date(ahora.getTime() - offset).toISOString().slice(0, 19)
-  })()
+    datetime: datetime.value,
   })
   enviando.value = false
 
@@ -138,6 +139,14 @@ function criptoActual() {
           <span>$ {{ exito.money.toLocaleString('es-AR') }} ARS</span>
         </div>
       </div>
+
+      <div class="campo">
+    <label>Fecha y hora</label>
+    <input
+        type="datetime-local"
+        v-model="datetime"
+    />
+</div>
 
       <button
         class="btn-submit"
