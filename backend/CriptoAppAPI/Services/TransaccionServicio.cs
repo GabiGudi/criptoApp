@@ -27,7 +27,8 @@ namespace CriptoAppAPI.Services
                     action = t.action,
                     crypto_amount = t.crypto_amount,
                     money = t.money,
-                    datetime = t.datetime
+                    datetime = t.datetime,
+                     cliente_id = t.cliente_id
                 })
                 .ToListAsync();
         }
@@ -45,7 +46,8 @@ namespace CriptoAppAPI.Services
                 action = dto.action,
                 crypto_amount = dto.crypto_amount,
                 money = total,
-                datetime = dto.datetime
+                datetime = dto.datetime,
+                cliente_id = dto.cliente_id
             };
 
             _contexto.Transacciones.Add(transaccion);
@@ -58,7 +60,8 @@ namespace CriptoAppAPI.Services
                 action = transaccion.action,
                 crypto_amount = transaccion.crypto_amount,
                 money = transaccion.money,
-                datetime = transaccion.datetime
+                datetime = transaccion.datetime,
+                cliente_id = transaccion.cliente_id
             };
         }
 
@@ -75,7 +78,8 @@ namespace CriptoAppAPI.Services
                 action = transaccion.action,
                 crypto_amount = transaccion.crypto_amount,
                 money = transaccion.money,
-                datetime = transaccion.datetime
+                datetime = transaccion.datetime,
+                cliente_id = transaccion.cliente_id
             };
         }
 
@@ -100,7 +104,8 @@ namespace CriptoAppAPI.Services
                 action = transaccion.action,
                 crypto_amount = transaccion.crypto_amount,
                 money = transaccion.money,
-                datetime = transaccion.datetime
+                datetime = transaccion.datetime,
+                cliente_id = transaccion.cliente_id
             };
         }
 
