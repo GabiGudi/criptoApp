@@ -46,22 +46,31 @@ async function enviarFormulario() {
     return
   }
 
-  enviando.value = true
-  const resultado = await api.crearTransaccion({
-    crypto_code:   crypto_code.value,
-    action:        action.value,
-    crypto_amount: Number(crypto_amount.value),
-    datetime: datetime.value,
-  })
-  enviando.value = false
+  try {
+    enviando.value = true
+    const resultado = await api.crearTransaccion({
+      crypto_code:   crypto_code.value,
+      action:        action.value,
+      crypto_amount: Number(crypto_amount.value),
+      datetime:      datetime.value,
+      cliente_id:    client_id.value ? Number(client_id.value) : null
+    })
 
-  if (resultado.id) {
-    exito.value = resultado
-    crypto_code.value   = ''
-    crypto_amount.value = ''
-    action.value        = 'purchase'
-  } else {
-    error.value = 'Hubo un error al guardar. Intentá de nuevo.'
+    if (resultado.id) {
+      exito.value = resultado
+      crypto_code.value   = ''
+      crypto_amount.value = ''
+      action.value        = 'purchase'
+      datetime.value      = ''
+    } else if (resultado.error) {
+      error.value = resultado.error
+    } else {
+      error.value = 'Hubo un error al guardar.'
+    }
+  } catch (e) {
+    error.value = 'No se pudo conectar con el servidor.'
+  } finally {
+    enviando.value = false
   }
 }
 

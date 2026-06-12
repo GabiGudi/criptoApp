@@ -31,6 +31,11 @@ export default {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(datos)
         })
+        
+        if (!respuesta.ok) {
+            const mensajeError = await respuesta.text()
+            return { error: mensajeError }
+        }
         return respuesta.json()
     },
 

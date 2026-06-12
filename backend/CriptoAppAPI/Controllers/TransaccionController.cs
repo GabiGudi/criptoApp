@@ -34,8 +34,17 @@ namespace CriptoAppAPI.Controllers
             if (dto.action != "purchase" && dto.action != "sale")
                 return BadRequest("La acción debe ser 'purchase' o 'sale'.");
 
-            var transaccion = await _transaccionServicio.Crear(dto);
-            return Ok(transaccion);
+            try
+            {
+                var transaccion = await _transaccionServicio.Crear(dto);
+                return Ok(transaccion);
+            }
+            catch(InvalidOperationException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
+            
         }
 
         // GET /transacciones/{id}

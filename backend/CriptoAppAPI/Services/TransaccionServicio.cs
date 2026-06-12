@@ -35,6 +35,27 @@ namespace CriptoAppAPI.Services
 
         public async Task<TransaccionDTO> Crear(CrearTransaccionDTO dto)
         {
+            if (dto.action == "sale")
+            {
+                var transacciones = await _contexto.Transacciones
+                    .Where(t => t.cliente_id == dto.cliente_id && t.crypto_code == dto.crypto_code)
+                    .ToListAsync();
+
+                decimal totalCompras = transacciones
+                    .Where(t => t.action == "purchase")
+                    .Sum(t => t.crypto_amount);
+
+                decimal totalVentas = transacciones
+                    .Where(t => t.action == "sale")
+                    .Sum(t => t.crypto_amount);
+
+                decimal stockActual = totalCompras - totalVentas;
+
+                if (dto.crypto_amount > stockActual)
+                {
+                    throw new InvalidOperationException($"No tenés suficiente {dto.crypto_code}. " + $"Stock actual: {stockActual}, intentás vender: {dto.crypto_amount}.");
+                }
+            }
             
             decimal precio = await _criptoYaServicio.ObtenerPrecio(dto.crypto_code);
 
